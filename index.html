@@ -1,114 +1,99 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lesson 2</title>
+    <title>Lesson 3</title>
     <meta charset="UTF-8" />
   </head>
   <body>
     <script>
       //task 1
-      // var a = 1,
-      //   b = 1,
-      //   c,
-      //   d;
-      // c = ++a;
-      // alert(c); // 2, инкремент в префиксной записи выполнится раньше присваивания, поэтому в с запишется уже новое значение а
-      // d = b++;
-      // alert(d); // 1, в данном случае, наоброт, сначала выполнится присваивание, а затем инкремент в постфиксной записи, поэтому в d запишется 1, а не 2, хотя значение b и поменяется
-      // c = 2 + ++a;
-      // alert(c); // 5, оператор инкремента в префиксной записи => сначала а увеличится на 1 (т.е. станет равным 3), затем выполнится оператор сложения 2+3=5
-      // d = 2 + b++;
-      // alert(d); // 4, сначала выполнится оператор сложения, т.е. 2+2=4, а затем уже к b применится инкремент в постфиксной записи и b станет равной 3
-      // alert(a); // 3, на предыдущем шаге значение а увеличилось на 1 (строка 18)
-      // alert(b); // 3, на предыдущем шаге значение b увеличилось на 1 (строка 20)
-
-      //task 2
-      // var a = 2;
-      // var x = 1 + (a *= 2);
-      // x=5 т.к. сначала выполнится умножение с присваивание и а станет равной 4, затем прибавится 1
-
-      //task 3
-      // var a = +prompt('переменная а');
-      // var b = +prompt('переменная b');
-      // if (a * b < 0) {
-      //   console.log(`Cумма: ${a + b}`);
-      // } else if (a * b === 0) {
-      //   console.log('Одно из чисел 0');
-      // } else if (a < 0) {
-      //   console.log(`Произведение: ${a * b}`);
-      // } else {
-      //   console.log(`Разность: ${a - b}`);
+      // var primeNumbers = [0, 1, 2]
+      // for (var i = 3; i < 100; i++) {
+      //   var j = 2
+      //   var isPrime = true;
+      //   while (j < i && isPrime) {
+      //     if (i % j === 0) {
+      //       isPrime = false
+      //     }
+      //     j++
+      //   }
+      //   if (isPrime) primeNumbers.push(i)
       // }
+      // console.log(primeNumbers)
 
       //task 4
-      // var a = +prompt('присвоить а значение от 0 до 15:');
-      // switch (a) {
-      //   case 0:
-      //     console.log(a++);
-      //   case 1:
-      //     console.log(a++);
-      //   case 2:
-      //     console.log(a++);
-      //   case 3:
-      //     console.log(a++);
-      //   case 4:
-      //     console.log(a++);
-      //   case 5:
-      //     console.log(a++);
-      //   case 6:
-      //     console.log(a++);
-      //   case 7:
-      //     console.log(a++);
-      //   case 8:
-      //     console.log(a++);
-      //   case 9:
-      //     console.log(a++);
-      //   case 10:
-      //     console.log(a++);
-      //   case 11:
-      //     console.log(a++);
-      //   case 12:
-      //     console.log(a++);
-      //   case 13:
-      //     console.log(a++);
-      //   case 14:
-      //     console.log(a++);
-      //   case 15: {
-      //     console.log(a++);
-      //   }
+      // var numbers = [];
+      // for (var i = 9; i >= 0; numbers.push(i--)) {}
+      // for (; numbers.length > 0; console.log(numbers.pop())) {}
+
+      //task 5
+      // var line = ['x'];
+      // while (line.length < 20) {
+      //   console.log(`${line.toString()}`);
+      //   line.push('x');
       // }
 
-      //task 5-6
-      // function calc(a, b, operator) {
-      //   switch (operator) {
-      //     case '+':
-      //       return a + b;
-      //     case '-':
-      //       return a - b;
-      //     case '*':
-      //       return a * b;
-      //     case '/':
-      //       return a / b;
-      //   }
-      // }
-      // var a = +prompt('a = ');
-      // var b = +prompt('b = ');
-      // var op = prompt('op: ');
-      // console.log(`Результат: ${a} ${op} ${b} = ${calc(a, b, op)}`);
-
-      //task 7
-      // null == 0 или null === 0 вернет false, т.к. ни один объект не равен null, за исключением undefined при нестрогом сравнении
-
-      //task 8
-      var val = +prompt('Основание: ');
-      var pow = +prompt('Степень: ');
-      function power(val, pow) {
-        if (pow > 0) {
-          return val * power(val, --pow);
-        }
-        return 1;
+      //камень-ножницы-бумага
+      //1 - камень
+      //2 - ножницы
+      //3 - бумага
+      var STONE = 1;
+      var SCISSERS = 2;
+      var PAPER = 3;
+      var VALUES = ['камень', 'ножницы', 'бумага'];
+      function move() {
+        return Math.floor(Math.random() * 3 + 1);
       }
-      console.log(`Результат ${val} ^ ${pow} = ${power(val, pow)}`);
+      function check(moveA, moveB) {
+        if (moveA === moveB) return 0;
+        switch (moveA) {
+          case STONE: {
+            if (moveB === SCISSERS) return 1;
+            if (moveB === PAPER) return -1;
+          }
+          case SCISSERS: {
+            if (moveB === STONE) return -1;
+            if (moveB === PAPER) return 1;
+          }
+          case PAPER: {
+            if (moveB === STONE) return 1;
+            if (moveB === SCISSERS) return -1;
+          }
+        }
+      }
+      function game() {
+        var round = 1;
+        var score = 0;
+        while (score !== -2 && round < 4) {
+          var yourMove = +prompt(
+            'Делайте ход: 1 - камень, 2 - ножницы, 3 - бумага. У вас три попытки.'
+          );
+          var computerMove = move();
+          score += check(yourMove, computerMove);
+          console.log(
+            `Раунд: ${round}\nВаш ход ${VALUES[yourMove - 1]}, ход компьютера ${
+              VALUES[computerMove - 1]
+            }.\nВаш счёт: ${score}`
+          );
+          round++;
+        }
+        return score;
+      }
+      function results(score) {
+        if (score > 0) {
+          console.log('ВЫ ВЫИГРАЛИ');
+        } else if (score === 0) {
+          console.log('НИЧЬЯ');
+        } else {
+          console.log('ВЫ ПРОИГРАЛИ');
+        }
+      }
+      var play = true;
+      while (play) {
+        results(game());
+        var ifContinue = prompt('Еще разок - Y');
+        if (ifContinue !== 'Y') play = false;
+      }
     </script>
   </body>
 </html>
