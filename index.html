@@ -1,8 +1,99 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lesson 1</title>
+    <title>Lesson 3</title>
     <meta charset="UTF-8" />
   </head>
-  <body></body>
+  <body>
+    <script>
+      //task 1
+      // var primeNumbers = [0, 1, 2]
+      // for (var i = 3; i < 100; i++) {
+      //   var j = 2
+      //   var isPrime = true;
+      //   while (j < i && isPrime) {
+      //     if (i % j === 0) {
+      //       isPrime = false
+      //     }
+      //     j++
+      //   }
+      //   if (isPrime) primeNumbers.push(i)
+      // }
+      // console.log(primeNumbers)
+
+      //task 4
+      // var numbers = [];
+      // for (var i = 9; i >= 0; numbers.push(i--)) {}
+      // for (; numbers.length > 0; console.log(numbers.pop())) {}
+
+      //task 5
+      // var line = ['x'];
+      // while (line.length < 20) {
+      //   console.log(`${line.toString()}`);
+      //   line.push('x');
+      // }
+
+      //камень-ножницы-бумага
+      //1 - камень
+      //2 - ножницы
+      //3 - бумага
+      var STONE = 1;
+      var SCISSERS = 2;
+      var PAPER = 3;
+      var VALUES = ['камень', 'ножницы', 'бумага'];
+      function move() {
+        return Math.floor(Math.random() * 3 + 1);
+      }
+      function check(moveA, moveB) {
+        if (moveA === moveB) return 0;
+        switch (moveA) {
+          case STONE: {
+            if (moveB === SCISSERS) return 1;
+            if (moveB === PAPER) return -1;
+          }
+          case SCISSERS: {
+            if (moveB === STONE) return -1;
+            if (moveB === PAPER) return 1;
+          }
+          case PAPER: {
+            if (moveB === STONE) return 1;
+            if (moveB === SCISSERS) return -1;
+          }
+        }
+      }
+      function game() {
+        var round = 1;
+        var score = 0;
+        while (score !== -2 && round < 4) {
+          var yourMove = +prompt(
+            'Делайте ход: 1 - камень, 2 - ножницы, 3 - бумага. У вас три попытки.'
+          );
+          var computerMove = move();
+          score += check(yourMove, computerMove);
+          console.log(
+            `Раунд: ${round}\nВаш ход ${VALUES[yourMove - 1]}, ход компьютера ${
+              VALUES[computerMove - 1]
+            }.\nВаш счёт: ${score}`
+          );
+          round++;
+        }
+        return score;
+      }
+      function results(score) {
+        if (score > 0) {
+          console.log('ВЫ ВЫИГРАЛИ');
+        } else if (score === 0) {
+          console.log('НИЧЬЯ');
+        } else {
+          console.log('ВЫ ПРОИГРАЛИ');
+        }
+      }
+      var play = true;
+      while (play) {
+        results(game());
+        var ifContinue = prompt('Еще разок - Y');
+        if (ifContinue !== 'Y') play = false;
+      }
+    </script>
+  </body>
 </html>
