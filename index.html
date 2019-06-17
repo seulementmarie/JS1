@@ -1,99 +1,88 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lesson 3</title>
+    <title>Lesson 4</title>
     <meta charset="UTF-8" />
   </head>
   <body>
     <script>
       //task 1
-      // var primeNumbers = [0, 1, 2]
-      // for (var i = 3; i < 100; i++) {
-      //   var j = 2
-      //   var isPrime = true;
-      //   while (j < i && isPrime) {
-      //     if (i % j === 0) {
-      //       isPrime = false
-      //     }
-      //     j++
+      // var digitalNumber = {
+      //   unit: "",
+      //   digit: "",
+      //   hundred: "",
+      //   createNew: function(unit, digit, hundred) {
+      //     this.unit = unit;
+      //     this.digit = digit;
+      //     this.hundred = hundred;
       //   }
-      //   if (isPrime) primeNumbers.push(i)
+      // };
+
+      // function getDigitalNumber(str) {
+      //   var number = +str;
+      //   if (number > 0 && number < 1000) {
+      //     return digitalNumber.createNew(
+      //       number % 10,
+      //       Math.floor(number / 10) % 10,
+      //       Math.floor(number / 100)
+      //     );
+      //   } else {
+      //     console.log("wrong values on input");
+      //   }
       // }
-      // console.log(primeNumbers)
+      // getDigitalNumber(prompt("Введите число от 0 до 999:"));
+      // console.log(digitalNumber);
 
-      //task 4
-      // var numbers = [];
-      // for (var i = 9; i >= 0; numbers.push(i--)) {}
-      // for (; numbers.length > 0; console.log(numbers.pop())) {}
+      //task 2
 
-      //task 5
-      // var line = ['x'];
-      // while (line.length < 20) {
-      //   console.log(`${line.toString()}`);
-      //   line.push('x');
-      // }
-
-      //камень-ножницы-бумага
-      //1 - камень
-      //2 - ножницы
-      //3 - бумага
-      var STONE = 1;
-      var SCISSERS = 2;
-      var PAPER = 3;
-      var VALUES = ['камень', 'ножницы', 'бумага'];
-      function move() {
-        return Math.floor(Math.random() * 3 + 1);
-      }
-      function check(moveA, moveB) {
-        if (moveA === moveB) return 0;
-        switch (moveA) {
-          case STONE: {
-            if (moveB === SCISSERS) return 1;
-            if (moveB === PAPER) return -1;
-          }
-          case SCISSERS: {
-            if (moveB === STONE) return -1;
-            if (moveB === PAPER) return 1;
-          }
-          case PAPER: {
-            if (moveB === STONE) return 1;
-            if (moveB === SCISSERS) return -1;
-          }
+      var questions = [
+        {
+          question: "Столица Канады? 1 - Ванкувер, 2 - Оттава",
+          answer: 2
+        },
+        {
+          question:
+            "Какое растение существует на самом деле? 1 - Лох чилийский, 2 - Лох индийский",
+          answer: 2
+        },
+        {
+          question:
+            "Как называется разновидность воды, в которой атом водорода замещён его изотопом дейтерием? 1 - Тяжелая, 2 - Средняя",
+          answer: 1
+        },
+        {
+          question:
+            "В какое море впадает река Урал? 1 - Каспийское, 2 - Азовское",
+          answer: 1
+        },
+        {
+          question:
+            "Что в России 19 века делали в дортуаре? 1 - Купались, 2 - Спали",
+          answer: 2
         }
-      }
-      function game() {
-        var round = 1;
+      ];
+
+      function play() {
+        var alive = true;
         var score = 0;
-        while (score !== -2 && round < 4) {
-          var yourMove = +prompt(
-            'Делайте ход: 1 - камень, 2 - ножницы, 3 - бумага. У вас три попытки.'
-          );
-          var computerMove = move();
-          score += check(yourMove, computerMove);
-          console.log(
-            `Раунд: ${round}\nВаш ход ${VALUES[yourMove - 1]}, ход компьютера ${
-              VALUES[computerMove - 1]
-            }.\nВаш счёт: ${score}`
-          );
-          round++;
+        while (alive && score < questions.length) {
+          var answer = +prompt(questions[score].question);
+          if (answer === questions[score].answer) {
+            console.log(`Right!`);
+            score++;
+          } else {
+            alive = false;
+            console.log(`Wrong!`);
+          }
         }
-        return score;
-      }
-      function results(score) {
-        if (score > 0) {
-          console.log('ВЫ ВЫИГРАЛИ');
-        } else if (score === 0) {
-          console.log('НИЧЬЯ');
+        if (alive) {
+          console.log("You won!");
         } else {
-          console.log('ВЫ ПРОИГРАЛИ');
+          console.log("You lost!");
         }
+        console.log(`Your total score: ${score}`);
       }
-      var play = true;
-      while (play) {
-        results(game());
-        var ifContinue = prompt('Еще разок - Y');
-        if (ifContinue !== 'Y') play = false;
-      }
+      play();
     </script>
   </body>
 </html>
