@@ -1,8 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lesson 1</title>
+    <title>Lesson 5</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="chessBoard"></div>
+    <script>
+      var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+      for (var i = 1; i <= 8; i++) {
+        var row = i % 2 === 0 ? "even" : "odd";
+        for (var j = 0; j <= 7; j++) {
+          var column = j % 2 === 0 ? "even" : "odd";
+          var className = "default";
+          if (column === row) {
+            className = "black";
+          }
+          var div = document.createElement("div");
+          div.className = `${className}`;
+          div.innerHTML = `<h1>${letters[j] + i}</h1>`;
+          document.getElementById("chessBoard").appendChild(div);
+        }
+      }
+    </script>
+  </body>
 </html>

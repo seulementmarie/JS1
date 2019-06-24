@@ -1,0 +1,17 @@
+#chessBoard {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  border: 2px solid black;
+  max-width: 480px;
+}
+
+#chessBoard div {
+  width: 60px;
+  height: 60px;
+  background: greenyellow;
+  text-align: center;
+}
+#chessBoard div.black {
+  background: rgb(238, 8, 150);
+  color: white;
+}
