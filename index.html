@@ -1,88 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lesson 4</title>
+    <title>Lesson 5</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
+    <div id="chessBoard"></div>
     <script>
-      //task 1
-      // var digitalNumber = {
-      //   unit: "",
-      //   digit: "",
-      //   hundred: "",
-      //   createNew: function(unit, digit, hundred) {
-      //     this.unit = unit;
-      //     this.digit = digit;
-      //     this.hundred = hundred;
-      //   }
-      // };
-
-      // function getDigitalNumber(str) {
-      //   var number = +str;
-      //   if (number > 0 && number < 1000) {
-      //     return digitalNumber.createNew(
-      //       number % 10,
-      //       Math.floor(number / 10) % 10,
-      //       Math.floor(number / 100)
-      //     );
-      //   } else {
-      //     console.log("wrong values on input");
-      //   }
-      // }
-      // getDigitalNumber(prompt("Введите число от 0 до 999:"));
-      // console.log(digitalNumber);
-
-      //task 2
-
-      var questions = [
-        {
-          question: "Столица Канады? 1 - Ванкувер, 2 - Оттава",
-          answer: 2
-        },
-        {
-          question:
-            "Какое растение существует на самом деле? 1 - Лох чилийский, 2 - Лох индийский",
-          answer: 2
-        },
-        {
-          question:
-            "Как называется разновидность воды, в которой атом водорода замещён его изотопом дейтерием? 1 - Тяжелая, 2 - Средняя",
-          answer: 1
-        },
-        {
-          question:
-            "В какое море впадает река Урал? 1 - Каспийское, 2 - Азовское",
-          answer: 1
-        },
-        {
-          question:
-            "Что в России 19 века делали в дортуаре? 1 - Купались, 2 - Спали",
-          answer: 2
-        }
-      ];
-
-      function play() {
-        var alive = true;
-        var score = 0;
-        while (alive && score < questions.length) {
-          var answer = +prompt(questions[score].question);
-          if (answer === questions[score].answer) {
-            console.log(`Right!`);
-            score++;
-          } else {
-            alive = false;
-            console.log(`Wrong!`);
+      var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+      for (var i = 1; i <= 8; i++) {
+        var row = i % 2 === 0 ? "even" : "odd";
+        for (var j = 0; j <= 7; j++) {
+          var column = j % 2 === 0 ? "even" : "odd";
+          var className = "default";
+          if (column === row) {
+            className = "black";
           }
+          var div = document.createElement("div");
+          div.className = `${className}`;
+          div.innerHTML = `<h1>${letters[j] + i}</h1>`;
+          document.getElementById("chessBoard").appendChild(div);
         }
-        if (alive) {
-          console.log("You won!");
-        } else {
-          console.log("You lost!");
-        }
-        console.log(`Your total score: ${score}`);
       }
-      play();
     </script>
   </body>
 </html>
